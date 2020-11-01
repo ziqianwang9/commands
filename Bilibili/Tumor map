@@ -1,0 +1,20 @@
+神外学影像2：损伤图谱(lesion map),和ROI提取。
+1. ROI extraction
+2. fslmaths atlas.nii -thr A -uthr A ROI_A.nii
+3.Time series extraction: fmri
+fslmaths -i fmr.nii.gz -o Time_series.txt -m ROI_A_bin.nii.gz
+
+mrstats FA.nii.gz -mask ROI_A_bin.mif -output mean
+
+###lesion map
+fslmaths A -add B C
+fslmaths 1.nii -mul 0 whole.nii.gz; for i in 1..60; do fslmaths whole.nii.gz -add $i.nii whole.nii.gz;done
+
+
+1. 勾画ROI
+2. Normalization T1-> standard brain(MNI) ??
+Clinical tool box->SPM.
+ANTs : advanced normalization tools
+-x weight, leison mask -> inverse  fslmaths -inverse
+
+3. t1_mni.m -> lesion.nii-> lesion_mni.nii.gz

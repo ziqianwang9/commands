@@ -1,0 +1,28 @@
+FreeSurfer应用广义线性模型
+1.要把模型信息放到以.fsgd结尾到文件中，以便Freesurfer识别
+例：
+GroupDescriptorFile 1
+Title post_compane
+Class G1
+Class G2
+(要是有第三个组，就加一个 Glass G3）
+（要加入两个Flag，因为有些协变量到尺度是不同到，比如年龄是0-100，但身高是0-200，所以会掩盖掉beta值之间但误差，所以要把这些值打上）
+RescaleFlag 1
+DemeanFlag 1
+Variable age score（有几个协变量就写几个）
+Input demo1（文件夹名字） G1 59（第一个协变量的值）  0.3（第二个协变量的值）
+Input demo2 G2 49 0.2
+Input ...
+（我们将比较1组别间有没有差异，2年龄间有没有差异，3组别和年龄有没有交互作用）
+
+2.构建矩阵，要以.mtx结尾
+（如果要实现G1和G2的比较，切不希望年龄和其它因素影想，且想用G2-G1）
+-1（G1） 1（G2） 0（G1年龄） 0（G2年龄） 0（score G1） 0（score G2）
+（如果想看G1-G2，不看年龄和score）
+1 -1 0 0 0 0
+（如果不想看两个组，想只看年龄信息是否显著，由于两个是平等的关系，我们只看随着年龄的增长，皮层厚度是否改变）
+0 0 1 1 0 0
+（如果不分组，只有年龄一个变量，只想看年龄的影响）
+0 1
+（分2组，想看组1年龄，组2年龄效应之间有没有交互，还是组1-组2）
+1 -1 1 -1（组1年龄的斜率减去组2年龄的斜率，freesurfer有很多范例https://surfer.nmr.mgh.harvard.edu/fswiki/FsgdExamples，这个网站里都有）

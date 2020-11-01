@@ -1,0 +1,4 @@
+1. Anonymize the dicom data
+2. Convert dicom to nifti
+mrconvert /Users/ziqianwanglive.cn/Desktop/Bilibili_3/OriginalImage-ano t1.nii.gz
+3. 

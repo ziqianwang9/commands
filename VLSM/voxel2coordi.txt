@@ -1,0 +1,12 @@
+# the coordinates of the max.
+#note: this will give us the fsl voxel coordinates. It is different from other voxel #coordintates, the x=182-x . You can open fsleyes and convert to MNI coordinates for safe.
+
+fslstats Average_AAT_05_thresh.nii -x
+
+## coordinates of the center of a mass 
+fslstats Average_AAT_05_thresh.nii -c
+
+
+
+## This website is for checking the Brodmann aeras for the MNI coordinats.
+http://sprout022.sprout.yale.edu/mni2tal/mni2tal.html
